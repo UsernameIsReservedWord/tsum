@@ -1,32 +1,43 @@
 package tsum.tests;
 
 import net.bytebuddy.utility.RandomString;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Managed;
+import net.thucydides.core.annotations.Steps;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import tsum.Config;
 import tsum.pages.Page;
 
-class PageTest extends Base {
+@RunWith(SerenityRunner.class)
+public class PageTest extends Base {
+    @Steps
 	private Page mainPage;
-	private FirefoxDriver driver;
 
-	@BeforeClass
-	public void beforeClass() {
-		System.setProperty("webdriver.gecko.driver", "c:\\geckodriver.exe");
-		driver = new FirefoxDriver();
-		mainPage = new Page(driver);
-	}
+	@Managed(driver = "Firefox")
+	private WebDriver driver;
 
 	@Before
-	void beforeTest() {
+	public void beforeTest() {
+		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/main/resources/drivers/geckodriver");
+		driver = new FirefoxDriver();
+		mainPage = new Page(driver);
 		driver.get(Config.get("url"));
 	}
 
+	@After
+    public void afterTest() {
+	    driver.quit();
+    }
+
 	@Test
-	void correctLogin() {
+	public void correctLogin() {
 		mainPage
 			.openLoginPopUp()
 			.setLogin(RandomString.make())

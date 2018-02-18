@@ -1,36 +1,31 @@
-group 'ru.tsum'
-apply plugin: 'java'
-apply plugin: 'org.junit.platform.gradle.plugin'
-
-version = '1.0'
 
 buildscript {
     repositories {
-        mavenCentral()
+        mavenLocal()
+        jcenter()
     }
     dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+        classpath("net.serenity-bdd:serenity-gradle-plugin:1.1.1")
     }
 }
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile 'net.serenity-bdd:serenity-core:1.1.1'
+    compile 'net.serenity-bdd:serenity-junit:1.1.1'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
-    testCompile "junit:junit:4.+"
+    compile "junit:junit:4.+"
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.1'
 }
 
-sourceSets {
-    test {
-        java {
-            srcDir 'src/test'
-        }
-    }
-}
-
-task wrapper(type: Wrapper){
-    gradleVersion = '1.6'
-}
+gradle.startParameter.continueOnFailure = true

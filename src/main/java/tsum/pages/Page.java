@@ -1,6 +1,10 @@
 package tsum.pages;
 
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Step;
+import net.thucydides.core.reports.adaptors.specflow.ScenarioStep;
 import org.junit.Assert;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,26 +48,31 @@ public class Page {
     @FindBy(xpath = errorField)
     private List<WebElement> errorElements;
 
+    @Step
     public Page openLoginPopUp() {
         loginButtonElement.click();
         return new Page(driver);
     }
 
+    @Step
     public Page setLogin(String login) {
         loginFieldElement.sendKeys(login);
         return new Page(driver);
     }
 
+    @Step
     public Page setPassword(String password) {
         passwordFieldElement.sendKeys(password);
         return new Page(driver);
     }
 
+    @Step
     public Page auth() {
         authElement.click();
         return new Page(driver);
     }
 
+    @Step
     public Page checkError(String expectedText) {
         errorElements.forEach(error->{
             if (error.isDisplayed()) {
