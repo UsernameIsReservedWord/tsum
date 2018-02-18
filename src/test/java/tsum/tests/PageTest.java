@@ -15,20 +15,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import tsum.Config;
 import tsum.pages.Page;
 
-//@RunWith(SerenityRunner.class)
-public class PageTest extends Base {
+@RunWith(SerenityRunner.class)
+public class PageTest {
 
-	@Steps
-	private Page mainPage;
+	private static Page mainPage;
 
-	private WebDriver driver;
+	private static WebDriver driver;
 
-	@Before
-	public void beforeTest() {
-		setDriver();
-		driver = new FirefoxDriver();
+	@BeforeClass
+	public static void beforeTest() {
+	    driver = new Base().setDriver();
 		mainPage = new Page(driver);
-		driver.get(Config.get("url"));
+		driver.get("https://www.tsum.ru/");
 	}
 
 	@After
@@ -38,7 +36,8 @@ public class PageTest extends Base {
 
 	@Test
 	public void incorrectLoginTest() {
-		mainPage
+	    driver.get("https://www.tsum.ru/");
+        mainPage
 			.openLoginPopUp()
 			.setLogin(RandomString.make())
 			.setPassword("Test12345")
@@ -50,10 +49,10 @@ public class PageTest extends Base {
 	@Test
 	public void successAuthTest() {
 		mainPage
-                .openLoginPopUp()
-				.setLogin(Config.get("defaultLogin"))
-				.setPassword(Config.get("defaultPassword"))
-				.auth()
+            .openLoginPopUp()
+			.setLogin(Config.get("defaultLogin"))
+			.setPassword(Config.get("defaultPassword"))
+            .auth()
             .checkProfileLinkText("Тест")
 				;
 	}

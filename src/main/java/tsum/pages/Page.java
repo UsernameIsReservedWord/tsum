@@ -13,11 +13,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import tsum.Config;
 
 import java.util.List;
 
 
-public class Page extends PageObject {
+public class Page {
 
     protected WebDriver driver;
 
@@ -57,31 +58,26 @@ public class Page extends PageObject {
     @FindBy(xpath = profileLink)
     private WebElement profileLinkElement;
 
-    @Step
     public Page openLoginPopUp() {
         loginButtonElement.click();
         return new Page(driver);
     }
 
-    @Step
     public Page setLogin(String login) {
         loginFieldElement.sendKeys(login);
         return new Page(driver);
     }
 
-    @Step
     public Page setPassword(String password) {
         passwordFieldElement.sendKeys(password);
         return new Page(driver);
     }
 
-    @Step
     public Page auth() {
         authElement.click();
         return new Page(driver);
     }
 
-    @Step
     public Page checkError(String expectedText) {
         errorElements.forEach(error->{
             if (error.isDisplayed()) {
@@ -91,9 +87,8 @@ public class Page extends PageObject {
         return new Page(driver);
     }
 
-    @Step
-    public Page checkProfileLinkText(String name) {
-        Assert.assertEquals("", name, profileLinkElement.getText());
+    public Page checkProfileLinkText(String expectedName) {
+        Assert.assertEquals("", expectedName, profileLinkElement.getText());
         return new Page(driver);
     }
 
