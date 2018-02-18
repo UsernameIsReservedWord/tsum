@@ -1,7 +1,11 @@
 package tsum.pages;
 
+import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.Step;
+import net.thucydides.core.annotations.Steps;
+import net.thucydides.core.annotations.WhenPageOpens;
 import net.thucydides.core.reports.adaptors.specflow.ScenarioStep;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -12,7 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class Page {
+
+public class Page extends PageObject {
 
     protected WebDriver driver;
 

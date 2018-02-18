@@ -15,17 +15,17 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import tsum.Config;
 import tsum.pages.Page;
 
-@RunWith(SerenityRunner.class)
+//@RunWith(SerenityRunner.class)
 public class PageTest extends Base {
-    @Steps
+
+	@Steps
 	private Page mainPage;
 
-	@Managed(driver = "Firefox")
 	private WebDriver driver;
 
 	@Before
 	public void beforeTest() {
-		System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"/src/main/resources/drivers/geckodriver");
+		setDriver();
 		driver = new FirefoxDriver();
 		mainPage = new Page(driver);
 		driver.get(Config.get("url"));
