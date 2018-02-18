@@ -33,8 +33,9 @@ public class Page extends PageObject {
     public static final String authButton = "//button[@type='submit']/span[.='Войти']";
     public static final String errorField = "//div[@class='field__error']";
     public static final String loginErrors = "//div[contains(@class, 'js-field-custom-email')]/div[@class=\"field__error\"]";
+    public static final String profileLink = "//a[@href=\"/personal/profile/\"]";
 
-    // Elemtns
+    // Elements
     @FindBy(xpath = loginButton)
     private WebElement loginButtonElement;
 
@@ -52,6 +53,9 @@ public class Page extends PageObject {
 
     @FindBy(xpath = errorField)
     private List<WebElement> errorElements;
+
+    @FindBy(xpath = profileLink)
+    private WebElement profileLinkElement;
 
     @Step
     public Page openLoginPopUp() {
@@ -84,6 +88,12 @@ public class Page extends PageObject {
                 Assert.assertEquals("", expectedText, error.getText());
             }
         });
+        return new Page(driver);
+    }
+
+    @Step
+    public Page checkProfileLinkText(String name) {
+        Assert.assertEquals("", name, profileLinkElement.getText());
         return new Page(driver);
     }
 

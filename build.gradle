@@ -13,8 +13,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'net.serenity-bdd.aggregator'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_9
+targetCompatibility = JavaVersion.VERSION_1_9
 
 repositories {
     mavenCentral()
@@ -23,9 +23,10 @@ repositories {
 dependencies {
     compile 'net.serenity-bdd:serenity-core:1.1.1'
     compile 'net.serenity-bdd:serenity-junit:1.1.1'
-    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile "junit:junit:4.+"
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.9.1'
+    testCompile('org.slf4j:slf4j-simple:1.7.7')
 }
 
 gradle.startParameter.continueOnFailure = true

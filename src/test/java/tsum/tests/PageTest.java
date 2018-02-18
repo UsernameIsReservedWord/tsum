@@ -37,7 +37,7 @@ public class PageTest extends Base {
     }
 
 	@Test
-	public void correctLogin() {
+	public void incorrectLoginTest() {
 		mainPage
 			.openLoginPopUp()
 			.setLogin(RandomString.make())
@@ -45,5 +45,16 @@ public class PageTest extends Base {
 			.auth()
 			.checkError("Указан некорректный email")
 		;
+	}
+
+	@Test
+	public void successAuthTest() {
+		mainPage
+                .openLoginPopUp()
+				.setLogin(Config.get("defaultLogin"))
+				.setPassword(Config.get("defaultPassword"))
+				.auth()
+            .checkProfileLinkText("Тест")
+				;
 	}
 }
