@@ -18,7 +18,7 @@ public class PersonalPage {
         this.driver = driver;
     }
 
-    public static final String phoneField = "//input[@name=\"FIELDS[PERSONAL_PHONE\"]";
+    public static final String phoneField = "//input[@name=\"FIELDS[PERSONAL_PHONE]\"]";
     public static final String saveButton = "//span[text()='Сохранить']";
     public static final String errorField = "//div[@class='field__error']";
 
@@ -41,11 +41,12 @@ public class PersonalPage {
     }
 
     public String getPhone() {
-        return phoneFieldElement.getText();
+        return phoneFieldElement.getAttribute("value");
     }
 
     public PersonalPage checkPhone(String expectedPhone) {
-        Assert.assertEquals("Номер телефона не совпадает", expectedPhone, getPhone());
+        Assert.assertEquals("Номер телефона не совпадает", expectedPhone,
+                getPhone().replaceAll("\\D+", ""));
         return new PersonalPage(driver);
     }
 

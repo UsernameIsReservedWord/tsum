@@ -28,7 +28,9 @@ public class PersonalPageTest {
 				.openLoginPopUp()
 				.setLogin(Config.get("defaultLogin"))
 				.setPassword(Config.get("defaultPassword"))
-				.auth();
+				.auth()
+				.navigateToPersonalPage()
+		;
 	}
 
 	@After

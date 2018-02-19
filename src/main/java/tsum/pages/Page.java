@@ -65,6 +65,11 @@ public class Page {
         return new Page(driver);
     }
 
+    public Page navigateToPersonalPage() {
+        profileLinkElement.click();
+        return new Page(driver);
+    }
+
     public Page setLogin(String login) {
         loginFieldElement.sendKeys(login);
         return new Page(driver);

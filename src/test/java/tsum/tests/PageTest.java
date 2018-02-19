@@ -47,7 +47,7 @@ public class PageTest {
 			.setLogin(Config.get("defaultLogin"))
 			.setPassword(Config.get("defaultPassword"))
             .auth()
-            .checkProfileLinkText("Тест")
+            .checkProfileLinkText("Тест Тестов")
 				;
 	}
 }
