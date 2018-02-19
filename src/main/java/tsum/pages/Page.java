@@ -9,10 +9,13 @@ import net.thucydides.core.annotations.WhenPageOpens;
 import net.thucydides.core.reports.adaptors.specflow.ScenarioStep;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import tsum.Config;
 
 import java.util.List;
@@ -27,8 +30,7 @@ public class Page {
         this.driver = driver;
     }
 
-
-    public static final String loginButton = "//a[.='Личный кабинет']";
+    public static final String loginButton = "//a[text()=\"Личный кабинет\"]";
     public static final String loginField = "//input[@name='email']";
     public static final String passwordField = "//input[@name='password']";
     public static final String authButton = "//button[@type='submit']/span[.='Войти']";
@@ -92,4 +94,8 @@ public class Page {
         return new Page(driver);
     }
 
+    public Page navigate() {
+        driver.get(Config.get("url"));
+        return new Page(driver);
+    }
 }

@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class PersonalPage {
 
     protected WebDriver driver;
@@ -18,6 +20,7 @@ public class PersonalPage {
 
     public static final String phoneField = "//input[@name=\"FIELDS[PERSONAL_PHONE\"]";
     public static final String saveButton = "//span[text()='Сохранить']";
+    public static final String errorField = "//div[@class='field__error']";
 
 
     // Elements
@@ -26,6 +29,9 @@ public class PersonalPage {
 
     @FindBy(xpath = saveButton)
     private WebElement saveButtonElement;
+
+    @FindBy(xpath = errorField)
+    private List<WebElement> errorFieldElements;
 
 
     public PersonalPage setPhone(String phone) {
@@ -40,6 +46,20 @@ public class PersonalPage {
 
     public PersonalPage checkPhone(String expectedPhone) {
         Assert.assertEquals("Номер телефона не совпадает", expectedPhone, getPhone());
+        return new PersonalPage(driver);
+    }
+
+    public PersonalPage saveData() {
+        saveButtonElement.click();
+        return new PersonalPage(driver);
+    }
+
+    public PersonalPage checkError(String expectedText) {
+        errorFieldElements.forEach(error->{
+            if (error.isDisplayed()) {
+                Assert.assertEquals("", expectedText, error.getText());
+            }
+        });
         return new PersonalPage(driver);
     }
 
